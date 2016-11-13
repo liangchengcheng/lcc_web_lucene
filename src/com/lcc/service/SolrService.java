@@ -131,5 +131,35 @@ public class SolrService {
 		page.setResultList(datas);
 		return page;
 	}
+	
+	/**
+	 * 删除索引
+	 * @param indexField
+	 */
+	public void deleteIndex(IndexField indexField){
+		try {
+			SolrContext.getServer().deleteById(indexField.getId());
+			SolrContext.getServer().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void commitDBIndex(){
+		try {
+			SolrContext.getServer().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteIndex(){
+		try {
+			SolrContext.getServer().deleteByQuery("*:*");
+			SolrContext.getServer().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }
